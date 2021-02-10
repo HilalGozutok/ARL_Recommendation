@@ -182,12 +182,12 @@ def create_rules(dataframe, country=False, head=5):
     if country:
         dataframe = dataframe[dataframe['Country'] == country]
         dataframe = create_invoice_product_df(dataframe)
-        frequent_itemsets = apriori(dataframe, min_support=0.01, use_colnames=True)
+        frequent_itemsets = apriori(dataframe, min_support=0.01, use_colnames=True,low_memory=True)
         rules = association_rules(frequent_itemsets, metric="support", min_threshold=0.01)
         print(rules.sort_values("lift", ascending=False).head(head))
     else:
         dataframe = create_invoice_product_df(dataframe)
-        frequent_itemsets = apriori(dataframe, min_support=0.01, use_colnames=True)
+        frequent_itemsets = apriori(dataframe, min_support=0.01, use_colnames=True,low_memory=True)
         rules = association_rules(frequent_itemsets, metric="support", min_threshold=0.01)
         print(rules.sort_values("lift", ascending=False).head(head))
 
